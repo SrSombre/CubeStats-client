@@ -24,7 +24,9 @@ export default function Draftpage() {
           showMessageWithTimeout(
             "success",
             true,
-            `Card no. ${amountDraftedCards + 1} added to draft selection`
+            `Added ${event.target.name}, pick no. ${
+              amountDraftedCards + 1
+            } to draftpool.`
           )
         )
       : dispatch(
@@ -47,13 +49,22 @@ export default function Draftpage() {
       );
   }
 
+  function saveDeck(event) {
+    // dispatch(storeDeck(event.target.value)) &&
+    console.log(draftedCards);
+    dispatch(
+      showMessageWithTimeout("success", true, `Saved deck. Happy drafting!`)
+    );
+  }
+
   return (
     <div>
       <h1>This is the drafting page.</h1>
+      <button onClick={saveDeck}>Save deck</button>
 
       <div>
         <h2>Drafted cards :</h2>
-        {draftedCards.map((card) => {
+        {draftedCards.map((card, index) => {
           return (
             <img
               src={card.image}
