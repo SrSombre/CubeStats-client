@@ -7,11 +7,9 @@ export default function Cubestats() {
 
       <div>
         <h3>Most drafted color:</h3>
-        <h3>Best performing color:</h3>
-        <h3>Best performing card:</h3>
-        <h3>Worst performing card:</h3>
-        <h3>Best performing player:</h3>
-        <h3>Worst performing player:</h3>
+        <h3>Most drafted card:</h3>
+        <h3>Least drafted color:</h3>
+        <h3>Least drafted card:</h3>
       </div>
     </div>
   );

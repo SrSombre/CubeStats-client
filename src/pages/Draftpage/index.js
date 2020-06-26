@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import { selectPlayer } from "../../store/player/selectors";
+import { selectToken } from "../../store/player/selectors";
 import { fetchCubeCards } from "../../store/cubeCards/actions";
 import { fetchCard } from "../../store/draftedCards/actions";
 import { undoCard } from "../../store/draftedCards/actions";
@@ -15,7 +17,10 @@ export default function Draftpage() {
   const cube = useSelector(selectCubeCards);
   const draftedCards = useSelector(selectDraftedCards);
   const amountDraftedCards = draftedCards.length;
-  const [name, setName] = useState("");
+  const [deckName, setDeckName] = useState("");
+  const player = useSelector(selectPlayer);
+  const token = useSelector(selectToken);
+  // const [playerName, setPlayerName] = useState(player.name);
 
   useEffect(() => {
     dispatch(fetchCubeCards());
@@ -54,7 +59,7 @@ export default function Draftpage() {
   }
 
   function saveDeck(event) {
-    if (name === "") {
+    if (deckName === "") {
       dispatch(
         showMessageWithTimeout(
           "danger",
@@ -62,14 +67,22 @@ export default function Draftpage() {
           `Please name your deck before saving`
         )
       );
+    } else if (!token) {
+      dispatch(
+        showMessageWithTimeout(
+          "danger",
+          true,
+          `Please log in to save your deck`
+        )
+      );
     } else {
       // dispatch(storeDeck(event.target.value)) &&
-      console.log(draftedCards, name);
+      console.log(draftedCards, deckName, player.name);
       dispatch(
         showMessageWithTimeout(
           "success",
           true,
-          `Saved deck "${name}". Happy drafting!`
+          `Saved deck "${deckName}". Happy drafting!`
         )
       );
     }
@@ -82,8 +95,8 @@ export default function Draftpage() {
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Deck name</Form.Label>
           <Form.Control
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            value={deckName}
+            onChange={(event) => setDeckName(event.target.value)}
             type="name"
             placeholder="Deck name"
             required
