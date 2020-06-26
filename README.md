@@ -1,7 +1,3 @@
-# Frontend template
-
-This is a simple react/redux/jwt template to start a project quickly
-
 ## Table of contents:
 
 - **[Setup](#setup-how-to-use-this-template)**
