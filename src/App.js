@@ -17,6 +17,7 @@ import Draftpage from "./pages/Draftpage";
 import Cubestats from "./pages/Cubestats";
 import Playerstats from "./pages/Playerstats";
 import Lifecounter from "./pages/Lifecounter";
+import Deckspage from "./pages/Deckspage";
 
 const Home = () => (
   <Jumbotron>
@@ -37,6 +38,11 @@ const Player = () => (
 const Draft = () => (
   <Jumbotron>
     <Draftpage />
+  </Jumbotron>
+);
+const Decks = () => (
+  <Jumbotron>
+    <Deckspage />
   </Jumbotron>
 );
 const Life = () => (
@@ -60,14 +66,12 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Home} />
-
         <Route path="/playerstats" component={Player} />
+        <Route path="/decks" component={Decks} />
         <Route path="/cubestats" component={Cube} />
         <Route path="/draft" component={Draft} />
         <Route path="/lifecounter" component={Life} />
-
         <Route path="/signup" component={SignUp} />
-
         <Route path="/login" component={Login} />
       </Switch>
     </div>

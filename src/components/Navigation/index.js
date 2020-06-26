@@ -29,6 +29,7 @@ export default function Navigation() {
 
           <NavbarItem path="/cubestats" linkText="Cube insights" />
           {token ? <NavbarItem path="/draft" linkText="Start draft" /> : null}
+          {token ? <NavbarItem path="/decks" linkText="Decks" /> : null}
           <NavbarItem path="/lifecounter" linkText="Lifecounter" />
           {loginLogoutControls}
         </Nav>

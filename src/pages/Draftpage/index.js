@@ -124,14 +124,3 @@ export default function Draftpage() {
     </div>
   );
 }
-
-// event.preventDefault();
-// if (amountDraftedCards === 45) {
-//   dispatch(
-//     showMessageMaxDraftPoolWithTimeout(
-// "danger",
-// true,
-// `You already have ${amountDraftedCards} cards selected.`
-//     )
-//   );
-// } else if
