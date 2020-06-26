@@ -1,8 +1,14 @@
 import { combineReducers } from "redux";
 import appState from "./appState/reducer";
-import user from "./user/reducer";
+import player from "./player/reducer";
+import cubeCards from "./cubeCards/reducer";
+import draftedCards from "./draftedCards/reducer";
+import decks from "./decks/reducer";
 
 export default combineReducers({
   appState,
-  user
+  player,
+  cubeCards,
+  draftedCards,
+  decks,
 });
