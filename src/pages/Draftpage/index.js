@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 import { fetchCubeCards } from "../../store/cubeCards/actions";
 import { fetchCard } from "../../store/draftedCards/actions";
 import { undoCard } from "../../store/draftedCards/actions";
@@ -12,6 +15,7 @@ export default function Draftpage() {
   const cube = useSelector(selectCubeCards);
   const draftedCards = useSelector(selectDraftedCards);
   const amountDraftedCards = draftedCards.length;
+  const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(fetchCubeCards());
@@ -50,17 +54,47 @@ export default function Draftpage() {
   }
 
   function saveDeck(event) {
-    // dispatch(storeDeck(event.target.value)) &&
-    console.log(draftedCards);
-    dispatch(
-      showMessageWithTimeout("success", true, `Saved deck. Happy drafting!`)
-    );
+    if (name === "") {
+      dispatch(
+        showMessageWithTimeout(
+          "danger",
+          true,
+          `Please name your deck before saving`
+        )
+      );
+    } else {
+      // dispatch(storeDeck(event.target.value)) &&
+      console.log(draftedCards, name);
+      dispatch(
+        showMessageWithTimeout(
+          "success",
+          true,
+          `Saved deck "${name}". Happy drafting!`
+        )
+      );
+    }
   }
 
   return (
     <div>
       <h1>This is the drafting page.</h1>
-      <button onClick={saveDeck}>Save deck</button>
+      <Container>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Deck name</Form.Label>
+          <Form.Control
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            type="name"
+            placeholder="Deck name"
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mt-5">
+          <Button variant="primary" type="submit" onClick={saveDeck}>
+            Save deck
+          </Button>
+        </Form.Group>
+      </Container>
 
       <div>
         <h2>Drafted cards :</h2>
