@@ -15,11 +15,12 @@ import { showMessageWithTimeout } from "../../store/appState/actions";
 export default function Draftpage() {
   const dispatch = useDispatch();
   const cube = useSelector(selectCubeCards);
-  const draftedCards = useSelector(selectDraftedCards);
-  const amountDraftedCards = draftedCards.length;
+  const draftedCardsTotal = useSelector(selectDraftedCards);
+  const amountDraftedCards = draftedCardsTotal.length;
   const [deckName, setDeckName] = useState("");
   const player = useSelector(selectPlayer);
   const token = useSelector(selectToken);
+  const [draftedCards, setDraftedCards] = useState(draftedCardsTotal);
   // const [playerName, setPlayerName] = useState(player.name);
 
   useEffect(() => {
@@ -88,12 +89,50 @@ export default function Draftpage() {
     }
   }
 
+  function filterWhite() {
+    const whiteFilter = draftedCards.filter((card) => {
+      if (card.colors === "{W}") return card;
+    });
+
+    setDraftedCards(whiteFilter);
+  }
+
+  function filterBlue() {
+    const blueFilter = draftedCards.filter((card) => {
+      if (card.colors === "{U}") return card;
+    });
+
+    setDraftedCards(blueFilter);
+  }
+
+  function filterBlack() {
+    const blackFilter = draftedCards.filter((card) => {
+      if (card.colors === "{B}") return card;
+    });
+
+    setDraftedCards(blackFilter);
+  }
+  function filterRed() {
+    const redFilter = draftedCards.filter((card) => {
+      if (card.colors === "{R}") return card;
+    });
+
+    setDraftedCards(redFilter);
+  }
+  function filterGreen() {
+    const greenFilter = draftedCards.filter((card) => {
+      if (card.colors === "{G}") return card;
+    });
+
+    setDraftedCards(greenFilter);
+  }
+
   return (
     <div>
       <h1>This is the drafting page.</h1>
       <Container>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Deck name</Form.Label>
+        <Form.Group controlId="formDeckName">
+          <Form.Label />
           <Form.Control
             value={deckName}
             onChange={(event) => setDeckName(event.target.value)}
@@ -111,28 +150,32 @@ export default function Draftpage() {
 
       <div>
         <h2>Drafted cards :</h2>
-        {draftedCards.map((card, index) => {
+        <Container>
+          <Form.Group className="mt-5">
+            <Button variant="primary" type="submit" onClick={filterWhite}>
+              Filter white
+            </Button>
+            <Button variant="primary" type="submit" onClick={filterBlue}>
+              Filter blue
+            </Button>
+            <Button variant="primary" type="submit" onClick={filterBlack}>
+              Filter black
+            </Button>
+            <Button variant="primary" type="submit" onClick={filterRed}>
+              Filter red
+            </Button>
+            <Button variant="primary" type="submit" onClick={filterGreen}>
+              Filter green
+            </Button>
+          </Form.Group>
+        </Container>
+
+        {draftedCards.map((card) => {
           return (
             <img
               src={card.image}
               key={card.id}
               alt={card.name}
-              cmc={card.cmc}
-              colors={card.colors}
-              createdat={card.createdAt}
-              id={card.id}
-              image={card.image}
-              keywords={card.keywords}
-              multiverse_id={card.multiverse_id}
-              name={card.name}
-              power={card.power}
-              rarity={card.rarity}
-              rulings_uri={card.rulings_uri}
-              scryfall_uri={card.scryfall_uri}
-              setname={card.setName}
-              toughness={card.toughness}
-              type={card.type}
-              updatedat={card.updatedAt}
               onClick={removeCard}
             />
           );
@@ -147,22 +190,6 @@ export default function Draftpage() {
               src={card.image}
               key={card.id}
               alt={card.name}
-              cmc={card.cmc}
-              colors={card.colors}
-              createdat={card.createdAt}
-              id={card.id}
-              image={card.image}
-              keywords={card.keywords}
-              multiverse_id={card.multiverse_id}
-              name={card.name}
-              power={card.power}
-              rarity={card.rarity}
-              rulings_uri={card.rulings_uri}
-              scryfall_uri={card.scryfall_uri}
-              setname={card.setName}
-              toughness={card.toughness}
-              type={card.type}
-              updatedat={card.updatedAt}
               onClick={addCard}
             />
           );
