@@ -8,6 +8,7 @@ import {
 
 export const FETCH_DRAFTED_CARD_SUCCESS = "FETCH_DRAFTED_CARD_SUCCESS";
 export const REMOVE_DRAFTED_CARD_SUCCESS = "REMOVE_DRAFTED_CARD_SUCCESS";
+export const FILTER_DRAFTPOOL_SUCCES = "FILTER_DRAFTPOOL_SUCCES";
 
 export const fetchDraftedCardSuccess = (draftedCard) => ({
   type: FETCH_DRAFTED_CARD_SUCCESS,
@@ -17,6 +18,11 @@ export const fetchDraftedCardSuccess = (draftedCard) => ({
 export const removeDraftedCardSuccess = (draftedCard) => ({
   type: REMOVE_DRAFTED_CARD_SUCCESS,
   payload: draftedCard,
+});
+
+export const filterDraftpoolSuccess = (colors) => ({
+  type: FILTER_DRAFTPOOL_SUCCES,
+  payload: colors,
 });
 
 export const fetchCard = (id) => {

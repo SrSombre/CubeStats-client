@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import ToggleButton from "react-bootstrap/ToggleButton";
 import { selectPlayer } from "../../store/player/selectors";
 import { selectToken } from "../../store/player/selectors";
 import { fetchCubeCards } from "../../store/cubeCards/actions";
@@ -12,16 +13,43 @@ import { selectCubeCards } from "../../store/cubeCards/selectors";
 import { selectDraftedCards } from "../../store/draftedCards/selectors";
 import { showMessageWithTimeout } from "../../store/appState/actions";
 
+import { selectWhiteDraftedCards } from "../../store/draftedCards/selectors";
+import { selectBlueDraftedCards } from "../../store/draftedCards/selectors";
+import { selectBlackDraftedCards } from "../../store/draftedCards/selectors";
+import { selectRedDraftedCards } from "../../store/draftedCards/selectors";
+import { selectGreenDraftedCards } from "../../store/draftedCards/selectors";
+
+import { selectWhiteCubeCards } from "../../store/cubeCards/selectors";
+import { selectBlueCubeCards } from "../../store/cubeCards/selectors";
+import { selectBlackCubeCards } from "../../store/cubeCards/selectors";
+import { selectRedCubeCards } from "../../store/cubeCards/selectors";
+import { selectGreenCubeCards } from "../../store/cubeCards/selectors";
+
 export default function Draftpage() {
   const dispatch = useDispatch();
+
   const cube = useSelector(selectCubeCards);
-  const draftedCardsTotal = useSelector(selectDraftedCards);
-  const amountDraftedCards = draftedCardsTotal.length;
+
+  const cubeWhite = useSelector(selectWhiteCubeCards);
+  const cubeBlue = useSelector(selectBlueCubeCards);
+  const cubeBlack = useSelector(selectBlackCubeCards);
+  const cubeRed = useSelector(selectRedCubeCards);
+  const cubeGreen = useSelector(selectGreenCubeCards);
+
+  const draftedTotal = useSelector(selectDraftedCards);
+  const draftedWhite = useSelector(selectWhiteDraftedCards);
+  const draftedBlue = useSelector(selectBlueDraftedCards);
+  const draftedBlack = useSelector(selectBlackDraftedCards);
+  const draftedRed = useSelector(selectRedDraftedCards);
+  const draftedGreen = useSelector(selectGreenDraftedCards);
+  const amountDraftedCards = draftedTotal.length;
+
   const [deckName, setDeckName] = useState("");
   const player = useSelector(selectPlayer);
   const token = useSelector(selectToken);
-  const [draftedCards, setDraftedCards] = useState(draftedCardsTotal);
-  // const [playerName, setPlayerName] = useState(player.name);
+
+  const [draftedCards, setDraftedCards] = useState(draftedTotal);
+  const [cubeCards, setCubeCards] = useState(cube);
 
   useEffect(() => {
     dispatch(fetchCubeCards());
@@ -89,47 +117,10 @@ export default function Draftpage() {
     }
   }
 
-  function filterWhite() {
-    const whiteFilter = draftedCards.filter((card) => {
-      if (card.colors === "{W}") return card;
-    });
-
-    setDraftedCards(whiteFilter);
-  }
-
-  function filterBlue() {
-    const blueFilter = draftedCards.filter((card) => {
-      if (card.colors === "{U}") return card;
-    });
-
-    setDraftedCards(blueFilter);
-  }
-
-  function filterBlack() {
-    const blackFilter = draftedCards.filter((card) => {
-      if (card.colors === "{B}") return card;
-    });
-
-    setDraftedCards(blackFilter);
-  }
-  function filterRed() {
-    const redFilter = draftedCards.filter((card) => {
-      if (card.colors === "{R}") return card;
-    });
-
-    setDraftedCards(redFilter);
-  }
-  function filterGreen() {
-    const greenFilter = draftedCards.filter((card) => {
-      if (card.colors === "{G}") return card;
-    });
-
-    setDraftedCards(greenFilter);
-  }
-
   return (
     <div>
       <h1>This is the drafting page.</h1>
+
       <Container>
         <Form.Group controlId="formDeckName">
           <Form.Label />
@@ -152,21 +143,64 @@ export default function Draftpage() {
         <h2>Drafted cards :</h2>
         <Container>
           <Form.Group className="mt-5">
-            <Button variant="primary" type="submit" onClick={filterWhite}>
-              Filter white
-            </Button>
-            <Button variant="primary" type="submit" onClick={filterBlue}>
-              Filter blue
-            </Button>
-            <Button variant="primary" type="submit" onClick={filterBlack}>
-              Filter black
-            </Button>
-            <Button variant="primary" type="submit" onClick={filterRed}>
-              Filter red
-            </Button>
-            <Button variant="primary" type="submit" onClick={filterGreen}>
-              Filter green
-            </Button>
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{W}"
+              data-toggle="toggle"
+              onChange={(e) => setDraftedCards(draftedWhite)}
+            >
+              White
+            </ToggleButton>
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setDraftedCards(draftedBlue)}
+            >
+              Blue
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setDraftedCards(draftedBlack)}
+            >
+              Black
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setDraftedCards(draftedRed)}
+            >
+              Red
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setDraftedCards(draftedGreen)}
+            >
+              Green
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="all"
+              data-toggle="toggle"
+              onChange={(e) => setDraftedCards(draftedTotal)}
+            >
+              All
+            </ToggleButton>
           </Form.Group>
         </Container>
 
@@ -176,6 +210,9 @@ export default function Draftpage() {
               src={card.image}
               key={card.id}
               alt={card.name}
+              id={card.id}
+              name={card.name}
+              colors={card.colors}
               onClick={removeCard}
             />
           );
@@ -184,12 +221,79 @@ export default function Draftpage() {
 
       <div>
         <h2>All cards in this cube:</h2>
-        {cube.map((card) => {
+
+        <Container>
+          <Form.Group className="mt-5">
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{W}"
+              data-toggle="toggle"
+              onChange={(e) => setCubeCards(cubeWhite)}
+            >
+              White
+            </ToggleButton>
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setCubeCards(cubeBlue)}
+            >
+              Blue
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setCubeCards(cubeBlack)}
+            >
+              Black
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setCubeCards(cubeRed)}
+            >
+              Red
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="{U}"
+              data-toggle="toggle"
+              onChange={(e) => setCubeCards(cubeGreen)}
+            >
+              Green
+            </ToggleButton>
+
+            <ToggleButton
+              type="checkbox"
+              variant="secondary"
+              value="all"
+              data-toggle="toggle"
+              onChange={(e) => setCubeCards(cube)}
+            >
+              All
+            </ToggleButton>
+          </Form.Group>
+        </Container>
+
+        {cubeCards.map((card) => {
           return (
             <img
               src={card.image}
               key={card.id}
               alt={card.name}
+              id={card.id}
+              name={card.name}
+              colors={card.colors}
               onClick={addCard}
             />
           );
