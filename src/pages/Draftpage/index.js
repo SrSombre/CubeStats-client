@@ -49,6 +49,9 @@ export default function Draftpage() {
   const token = useSelector(selectToken);
 
   const [draftedCards, setDraftedCards] = useState(draftedTotal);
+  const sortedDraftedCards = draftedCards.sort(function (a, b) {
+    return a.cmc - b.cmc;
+  });
   const [cubeCards, setCubeCards] = useState(cube);
 
   useEffect(() => {
@@ -204,7 +207,7 @@ export default function Draftpage() {
           </Form.Group>
         </Container>
 
-        {draftedCards.map((card) => {
+        {sortedDraftedCards.map((card) => {
           return (
             <img
               src={card.image}
