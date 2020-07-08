@@ -4,31 +4,39 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import ToggleButton from "react-bootstrap/ToggleButton";
-import { selectPlayer } from "../../store/player/selectors";
 import { selectToken } from "../../store/player/selectors";
 import { fetchCubeCards } from "../../store/cubeCards/actions";
 import { fetchCard } from "../../store/draftedCards/actions";
 import { undoCard } from "../../store/draftedCards/actions";
 import { selectCubeCards } from "../../store/cubeCards/selectors";
-import { selectDraftedCards } from "../../store/draftedCards/selectors";
+import {
+  selectDraftedCards,
+  selectDraftedCardsId,
+} from "../../store/draftedCards/selectors";
 import { showMessageWithTimeout } from "../../store/appState/actions";
+import { storeDeck } from "../../store/decks/actions";
 
-import { selectWhiteDraftedCards } from "../../store/draftedCards/selectors";
-import { selectBlueDraftedCards } from "../../store/draftedCards/selectors";
-import { selectBlackDraftedCards } from "../../store/draftedCards/selectors";
-import { selectRedDraftedCards } from "../../store/draftedCards/selectors";
-import { selectGreenDraftedCards } from "../../store/draftedCards/selectors";
+import {
+  selectWhiteDraftedCards,
+  selectBlueDraftedCards,
+  selectBlackDraftedCards,
+  selectRedDraftedCards,
+  selectGreenDraftedCards,
+} from "../../store/draftedCards/selectors";
 
-import { selectWhiteCubeCards } from "../../store/cubeCards/selectors";
-import { selectBlueCubeCards } from "../../store/cubeCards/selectors";
-import { selectBlackCubeCards } from "../../store/cubeCards/selectors";
-import { selectRedCubeCards } from "../../store/cubeCards/selectors";
-import { selectGreenCubeCards } from "../../store/cubeCards/selectors";
+import {
+  selectWhiteCubeCards,
+  selectBlueCubeCards,
+  selectBlackCubeCards,
+  selectRedCubeCards,
+  selectGreenCubeCards,
+} from "../../store/cubeCards/selectors";
 
 export default function Draftpage() {
   const dispatch = useDispatch();
 
   const cube = useSelector(selectCubeCards);
+  const draftedCardIds = useSelector(selectDraftedCardsId);
 
   const cubeWhite = useSelector(selectWhiteCubeCards);
   const cubeBlue = useSelector(selectBlueCubeCards);
@@ -45,10 +53,11 @@ export default function Draftpage() {
   const amountDraftedCards = draftedTotal.length;
 
   const [deckName, setDeckName] = useState("");
-  const player = useSelector(selectPlayer);
+
   const token = useSelector(selectToken);
 
   const [draftedCards, setDraftedCards] = useState(draftedTotal);
+
   const sortedDraftedCards = draftedCards.sort(function (a, b) {
     return a.cmc - b.cmc;
   });
@@ -108,15 +117,14 @@ export default function Draftpage() {
         )
       );
     } else {
-      // dispatch(storeDeck(event.target.value)) &&
-      console.log(draftedCards, deckName, player.name);
-      dispatch(
-        showMessageWithTimeout(
-          "success",
-          true,
-          `Saved deck "${deckName}". Happy drafting!`
-        )
-      );
+      dispatch(storeDeck(deckName, draftedCardIds)) &&
+        dispatch(
+          showMessageWithTimeout(
+            "success",
+            true,
+            `Saved deck "${deckName}". Happy drafting!`
+          )
+        );
     }
   }
 
@@ -136,7 +144,12 @@ export default function Draftpage() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={saveDeck}>
+          <Button
+            variant="primary"
+            type="submit"
+            value={draftedCardIds}
+            onClick={saveDeck}
+          >
             Save deck
           </Button>
         </Form.Group>

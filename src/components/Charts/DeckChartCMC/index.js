@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 
-const DeckChart = (props) => {
+const DeckChartCMC = (props) => {
   const [chartData, setChartData] = useState({});
 
   const chart = () => {
+    const white = props.white;
+    const blue = props.blue;
+    const black = props.black;
+    const red = props.red;
+    const green = props.green;
+
     setChartData({
       labels: ["White", "Blue", "Black", "Red", "Green"],
       datasets: [
         {
-          label: "CMC",
-          data: [1, 2, 5, 9, 3],
+          label: "Colors",
+          data: [white, blue, black, red, green],
           backgroundColor: [`rgba(75, 192, 291, 0.6)`],
           borderwidth: 4,
         },
@@ -34,4 +40,4 @@ const DeckChart = (props) => {
   );
 };
 
-export default DeckChart;
+export default DeckChartCMC;

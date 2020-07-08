@@ -5,7 +5,7 @@ const initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DECKS_SUCCESS:
-      return [...action.payload];
+      return [action.payload];
 
     default:
       return state;

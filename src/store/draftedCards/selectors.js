@@ -24,3 +24,8 @@ export const selectGreenDraftedCards = (state) =>
   state.draftedCards.filter((card) => {
     return card.colors === "{G}";
   });
+
+export const selectDraftedCardsId = (state) =>
+  state.draftedCards.map((cards) => {
+    return cards.id;
+  });
