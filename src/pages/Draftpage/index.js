@@ -70,6 +70,7 @@ export default function Draftpage() {
   function addCard(event) {
     amountDraftedCards <= 44
       ? dispatch(fetchCard(event.target.id)) &&
+        setDraftedCards(draftedTotal) &&
         dispatch(
           showMessageWithTimeout(
             "success",
@@ -122,7 +123,7 @@ export default function Draftpage() {
           showMessageWithTimeout(
             "success",
             true,
-            `Saved deck "${deckName}". Happy drafting!`
+            `Saved deck "${deckName}". Good luck!`
           )
         );
     }
@@ -131,6 +132,7 @@ export default function Draftpage() {
   return (
     <div>
       <h1>This is the drafting page.</h1>
+      <h4>Select your cards and save your deck afterwards</h4>
 
       <Container>
         <Form.Group controlId="formDeckName">
@@ -156,11 +158,12 @@ export default function Draftpage() {
       </Container>
 
       <div>
-        <h2>Drafted cards :</h2>
-        <Container>
+        <h2>Drafted cards:</h2>
+        <h4>{amountDraftedCards} total</h4>
+        <Container type="radio">
           <Form.Group className="mt-5">
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{W}"
               data-toggle="toggle"
@@ -169,7 +172,7 @@ export default function Draftpage() {
               White
             </ToggleButton>
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{U}"
               data-toggle="toggle"
@@ -179,9 +182,9 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
-              value="{U}"
+              value="{B}"
               data-toggle="toggle"
               onChange={(e) => setDraftedCards(draftedBlack)}
             >
@@ -189,9 +192,9 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
-              value="{U}"
+              value="{R}"
               data-toggle="toggle"
               onChange={(e) => setDraftedCards(draftedRed)}
             >
@@ -199,9 +202,9 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
-              value="{U}"
+              value="{G}"
               data-toggle="toggle"
               onChange={(e) => setDraftedCards(draftedGreen)}
             >
@@ -209,7 +212,7 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="all"
               data-toggle="toggle"
@@ -241,7 +244,7 @@ export default function Draftpage() {
         <Container>
           <Form.Group className="mt-5">
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{W}"
               data-toggle="toggle"
@@ -250,7 +253,7 @@ export default function Draftpage() {
               White
             </ToggleButton>
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{U}"
               data-toggle="toggle"
@@ -260,7 +263,7 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{U}"
               data-toggle="toggle"
@@ -270,7 +273,7 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{U}"
               data-toggle="toggle"
@@ -280,7 +283,7 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="{U}"
               data-toggle="toggle"
@@ -290,7 +293,7 @@ export default function Draftpage() {
             </ToggleButton>
 
             <ToggleButton
-              type="checkbox"
+              type="radio"
               variant="secondary"
               value="all"
               data-toggle="toggle"

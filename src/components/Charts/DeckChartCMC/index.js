@@ -5,18 +5,63 @@ const DeckChartCMC = (props) => {
   const [chartData, setChartData] = useState({});
 
   const chart = () => {
-    const white = props.white;
-    const blue = props.blue;
-    const black = props.black;
-    const red = props.red;
-    const green = props.green;
+    const zero = props.zero;
+    const one = props.one;
+    const two = props.two;
+    const three = props.three;
+    const four = props.four;
+    const five = props.five;
+    const six = props.six;
+    const seven = props.seven;
+    const eight = props.eight;
+    const nine = props.nine;
+    const ten = props.ten;
+    const eleven = props.eleven;
+    const twelve = props.twelve;
+    const thirteen = props.thirteen;
+    const fourteen = props.fourteen;
+    const fifteen = props.fifteen;
 
     setChartData({
-      labels: ["White", "Blue", "Black", "Red", "Green"],
+      labels: [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+      ],
       datasets: [
         {
           label: "Colors",
-          data: [white, blue, black, red, green],
+          data: [
+            zero,
+            one,
+            two,
+            three,
+            four,
+            five,
+            six,
+            seven,
+            eight,
+            nine,
+            ten,
+            eleven,
+            twelve,
+            thirteen,
+            fourteen,
+            fifteen,
+          ],
           backgroundColor: [`rgba(75, 192, 291, 0.6)`],
           borderwidth: 4,
         },
@@ -29,7 +74,7 @@ const DeckChartCMC = (props) => {
   }, []);
 
   return (
-    <div className="deckChart" style={{ height: "300px", width: "300px" }}>
+    <div className="deckChart" style={{ height: "200px", width: "600px" }}>
       <Line
         data={chartData}
         options={{

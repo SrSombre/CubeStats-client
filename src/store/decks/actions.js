@@ -7,10 +7,18 @@ import {
 } from "../appState/actions";
 
 export const FETCH_DECKS_SUCCESS = "FETCH_DECKS_SUCCESS";
+export const FETCH_DECKS_ACTIVE_USER_SUCCESS =
+  "FETCH_DECKS_ACTIVE_USER_SUCCESS";
+
 export const SAVE_DECKS_SUCCESS = "SAVE_DECKS_SUCCESS";
 
 export const fetchDecksSuccess = (decks) => ({
   type: FETCH_DECKS_SUCCESS,
+  payload: decks,
+});
+
+export const fetchDecksActiveUserSuccess = (decks) => ({
+  type: FETCH_DECKS_ACTIVE_USER_SUCCESS,
   payload: decks,
 });
 
@@ -37,22 +45,22 @@ export const fetchDecks = () => {
 
 //Fetch decks for active user: /decks/user/:userId
 
-// export const fetchDecksUser = () => {
-//   return async (dispatch, getState) => {
-//     const { token } = getState().player;
-//     const userId = getState().player;
+export const fetchDecksActiveUser = () => {
+  return async (dispatch, getState) => {
+    const { token } = getState().player;
+    const userId = getState().player;
 
-//     dispatch(appLoading());
-//     const response = await axios.get(`${apiUrl}/decks/user/${userId}`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     console.log(response);
-//     dispatch(fetchDecksSuccess(response.data));
-//     dispatch(appDoneLoading());
-//   };
-// };
+    dispatch(appLoading());
+    const response = await axios.get(`${apiUrl}/decks/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+    dispatch(fetchDecksActiveUserSuccess(response.data));
+    dispatch(appDoneLoading());
+  };
+};
 
 export const storeDeck = (name, cardIds) => {
   return async (dispatch, getState) => {

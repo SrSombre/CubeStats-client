@@ -5,13 +5,25 @@ const DeckChartCSL = (props) => {
   const [chartData, setChartData] = useState({});
 
   const chart = () => {
+    const white = props.white;
+    const blue = props.blue;
+    const black = props.black;
+    const red = props.red;
+    const green = props.green;
+
     setChartData({
-      labels: ["Creatures", "Spells", "Land"],
+      labels: ["White", "Blue", "Black", "Red", "Green"],
       datasets: [
         {
-          label: "CSL",
-          data: [13, 12, 16, 0],
-          backgroundColor: [`rgba(75, 192, 192, 1)`],
+          label: "Colors",
+          data: [white, blue, black, red, green],
+          backgroundColor: [
+            `rgb(249, 250, 244)`,
+            `rgb(14, 104, 171)`,
+            `rgb(21, 11, 0)`,
+            `rgb(211, 32, 42)`,
+            `rgb(0, 115, 62)`,
+          ],
           borderColor: `rgba(0,0,0,1)`,
           borderwidth: 2,
         },
@@ -24,7 +36,7 @@ const DeckChartCSL = (props) => {
   }, []);
 
   return (
-    <div className="deckChart" style={{ height: "300px", width: "300px" }}>
+    <div className="deckChart" style={{ height: "300px", width: "600px" }}>
       <Bar
         data={chartData}
         options={{
