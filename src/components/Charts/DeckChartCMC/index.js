@@ -43,7 +43,7 @@ const DeckChartCMC = (props) => {
       ],
       datasets: [
         {
-          label: "Colors",
+          label: "Mana curve",
           data: [
             zero,
             one,
