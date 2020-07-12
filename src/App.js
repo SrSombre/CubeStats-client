@@ -21,7 +21,7 @@ import Deckspage from "./pages/Deckspage";
 
 const Home = () => (
   <Jumbotron>
-    <h1>Home</h1>
+    <h1>Welcome to the Cube App!</h1>
     <Homepage />
   </Jumbotron>
 );

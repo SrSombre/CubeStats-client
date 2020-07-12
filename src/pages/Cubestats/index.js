@@ -91,34 +91,53 @@ export default function Cubestats() {
   }
 
   useEffect(() => {
+    dispatch(fetchDecks());
     mostDraftedColorInCube();
     leastDraftedColorInCube();
-    dispatch(fetchDecks());
   }, [dispatch]);
 
-  if (!decks[0]) {
+  // if (
+  //   !decks[0] ||
+  //   !whiteCount ||
+  //   !blueCount ||
+  //   !blackCount ||
+  //   !redCount ||
+  //   !greenCount ||
+  //   !totalDecksCount ||
+  //   !leastCountAll ||
+  //   !maxCountAll ||
+  //   !leastCountAll
+  // )
+  //   return [];
+
+  if (!decks) {
     return [];
   }
-  // if (!whiteCount) {
-  //   return [];
-  // }
-  // if (!blueCount) {
-  //   return [];
-  // }
-  // if (!blackCount) {
-  //   return [];
-  // }
-  // if (!redCount) {
-  //   return [];
-  // }
-  // if (!greenCount) {
-  //   return [];
-  // }
+  if (!whiteCount) {
+    return [];
+  }
+  if (!blueCount) {
+    return [];
+  }
+  if (!blackCount) {
+    return [];
+  }
+  if (!redCount) {
+    return [];
+  }
+  if (!greenCount) {
+    return [];
+  }
   if (!totalDecksCount) {
     return [];
   }
+  if (!leastCountAll) {
+    return [];
+  }
+  if (!maxCountAll) {
+    return [];
+  }
 
-  console.log("LENGTHdecks", totalDecksCount);
   return (
     <div>
       <h1>Cube data.</h1>
@@ -129,34 +148,34 @@ export default function Cubestats() {
           cube.
         </h3>
         <h3>
-          Most drafted color is {mostDraftedColor}, with {maxCountAll} cards
-          total.
+          Most drafted color is {mostDraftedColorInCube} , with {maxCountAll}
+          cards total.
         </h3>
 
         <h3>
-          Least drafted color is {leastDraftedColor}, with {leastCountAll} cards
-          total.
+          Least drafted color is {leastDraftedColorInCube} , with
+          {leastCountAll}. cards total.
         </h3>
 
-        <div class="container" class="p-3 border bg-dark">
-          <div class="row">
-            <div class="col">
+        <div className="container" className="p-3 border bg-dark">
+          <div className="row">
+            <div className="col">
               <DeckChartCMC
-                totalDecks={totalDecksCount}
-                white={whiteCount}
-                blue={blueCount}
-                black={blackCount}
-                red={redCount}
-                green={greenCount}
+              // totalDecks={totalDecksCount}
+              // white={whiteCount}
+              // blue={blueCount}
+              // black={blackCount}
+              // red={redCount}
+              // green={greenCount}
               />
             </div>
-            <div class="col">
+            <div className="col">
               <DeckChartCSL
-                white={whiteCount}
-                blue={blueCount}
-                black={blackCount}
-                red={redCount}
-                green={greenCount}
+              // white={whiteCount}
+              // blue={blueCount}
+              // black={blackCount}
+              // red={redCount}
+              // green={greenCount}
               />
             </div>
           </div>

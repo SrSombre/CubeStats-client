@@ -12,6 +12,7 @@ import {
   selectUserDecksGreenCount,
   selectUserDeckCount,
 } from "../../store/decks/selectors";
+import TypeChart from "../../components/Charts/TypeChart";
 
 export default function Playerstats() {
   const dispatch = useDispatch();
@@ -108,8 +109,6 @@ export default function Playerstats() {
   //   return [];
   // }
 
-  console.log("TESTLOG");
-
   return (
     <div>
       <h1>Player statistics will be shown here.</h1>
@@ -125,11 +124,10 @@ export default function Playerstats() {
       <div>
         <h1>These are your previously drafted decks</h1>
         {decks.map((deck) => {
-          console.log("DECK", deck);
           return (
             <div
               className="p-3 border bg-dark"
-              key={`${deck.id}_${deck.playerId}`}
+              key={`${deck.deck.name}_${deck.deck.id}`}
             >
               <div key={deck.deck.id} className="border-bottom">
                 <h1 className="text-white">{deck.deck.name}</h1>
@@ -153,6 +151,17 @@ export default function Playerstats() {
                         thirteen={deck.cmc[13]}
                         fourteen={deck.cmc[14]}
                         fifteen={deck.cmc[15]}
+                      />
+                    </div>
+                    <div className="col-sm">
+                      <TypeChart
+                        artifact={deck.type.artifact}
+                        creature={deck.type.creature}
+                        land={deck.type.land}
+                        enchantment={deck.type.enchantment}
+                        planeswalker={deck.type.planeswalker}
+                        sorcery={deck.type.sorcery}
+                        instant={deck.type.instant}
                       />
                     </div>
                     <div className="col">

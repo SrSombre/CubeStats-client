@@ -1,16 +1,12 @@
 export const selectDecks = (state) => state.decks;
 
-export const selectTotalDecksCount = (state) =>
-  state.decks[0].map((deck) => {
-    return deck.id;
-  });
+export const selectDecksWhiteCount = (state) => state.decks;
 
-export const selectDecksWhiteCount = (state) =>
-  state.decks[0].map((deck) => {
-    if (deck.stats["{W}"] >= 0) {
-      return deck.stats["{W}"];
-    }
-  });
+// [0].map((deck) => {
+//   if (deck.stats["{W}"] >= 0) {
+//     return deck.stats["{W}"];
+//   }
+// });
 
 export const selectDecksBlueCount = (state) =>
   state.decks[0].map((deck) => {
@@ -39,6 +35,8 @@ export const selectDecksGreenCount = (state) =>
       return deck.stats["{G}"];
     }
   });
+
+export const selectTotalDecksCount = (state) => state.decks[0];
 
 export const selectUserDecksWhiteCount = (state) =>
   state.decks.player.map((deck) => {

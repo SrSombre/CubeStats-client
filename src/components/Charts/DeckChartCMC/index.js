@@ -74,7 +74,7 @@ const DeckChartCMC = (props) => {
   }, []);
 
   return (
-    <div className="deckChart" style={{ height: "200px", width: "600px" }}>
+    <div className="deckChart" style={{ height: "200px", width: "500px" }}>
       <Line
         data={chartData}
         options={{

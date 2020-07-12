@@ -36,7 +36,7 @@ const DeckChartCSL = (props) => {
   }, []);
 
   return (
-    <div className="deckChart" style={{ height: "300px", width: "600px" }}>
+    <div className="deckChart" style={{ height: "300px", width: "500px" }}>
       <Bar
         data={chartData}
         options={{

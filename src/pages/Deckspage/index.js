@@ -4,6 +4,7 @@ import { fetchDecks } from "../../store/decks/actions";
 import { selectDecks } from "../../store/decks/selectors";
 import DeckChartCMC from "../../components/Charts/DeckChartCMC/index";
 import DeckChartCSL from "../../components/Charts/DeckChartCSL";
+import TypeChart from "../../components/Charts/TypeChart";
 
 export default function Deckspage() {
   const dispatch = useDispatch();
@@ -21,12 +22,12 @@ export default function Deckspage() {
       <h1>These are all the decks drafted with this cube</h1>
       {decks[0].map((deck) => {
         return (
-          <div className="p-3 border bg-dark" key={deck.deck.index}>
+          <div className="p-3 border bg-dark" key={deck.deck.name}>
             <div key={deck.deck.id} className="border-bottom">
-              <h1 className="text-white">{deck.deck.name}</h1>
+              <h1 className="text-white">{deck.deck.index}</h1>
               <div className="container" className="p-3 border bg-grey">
                 <div className="row">
-                  <div className="col">
+                  <div className="col-sm">
                     <DeckChartCMC
                       zero={deck.cmc[0]}
                       one={deck.cmc[1]}
@@ -46,7 +47,19 @@ export default function Deckspage() {
                       fifteen={deck.cmc[15]}
                     />
                   </div>
-                  <div className="col">
+
+                  <div className="col-sm">
+                    <TypeChart
+                      artifact={deck.type.artifact}
+                      creature={deck.type.creature}
+                      land={deck.type.land}
+                      enchantment={deck.type.enchantment}
+                      planeswalker={deck.type.planeswalker}
+                      sorcery={deck.type.sorcery}
+                      instant={deck.type.instant}
+                    />
+                  </div>
+                  <div className="col-sm">
                     <DeckChartCSL
                       white={deck.stats["{W}"]}
                       blue={deck.stats["{U}"]}

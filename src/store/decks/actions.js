@@ -1,10 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import {
-  appLoading,
-  appDoneLoading,
-  //   showMessageWithTimeout,
-} from "../appState/actions";
+import { appLoading, appDoneLoading } from "../appState/actions";
 
 export const FETCH_DECKS_SUCCESS = "FETCH_DECKS_SUCCESS";
 export const FETCH_DECKS_ACTIVE_USER_SUCCESS =
@@ -37,13 +33,11 @@ export const fetchDecks = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
+
     dispatch(fetchDecksSuccess(response.data));
     dispatch(appDoneLoading());
   };
 };
-
-//Fetch decks for active user: /decks/user/:userId
 
 export const fetchDecksActiveUser = () => {
   return async (dispatch, getState) => {
@@ -56,7 +50,7 @@ export const fetchDecksActiveUser = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
+
     dispatch(fetchDecksActiveUserSuccess(response.data));
     dispatch(appDoneLoading());
   };
@@ -80,7 +74,6 @@ export const storeDeck = (name, cardIds) => {
       }
     );
 
-    console.log(response);
     dispatch(saveDecksSuccess(response.data));
     dispatch(appDoneLoading());
   };
