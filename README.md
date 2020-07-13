@@ -1,4 +1,4 @@
-<h1> Cube App <h1>
+<h1> Cube App </h1>
 
 
 <h3> What is this app about? <h3>
@@ -65,7 +65,6 @@ The goal of this project is to build a full-stack app, practicing known and expl
 - As a player, I want to select my drafted cards from the cube and store them into a deck.
 - As a player, I want to be able to see my previous drafted decks, as well as other players previously drafted decks.
 - As a player, I would like to have a life counter page for my games after the draft. This way I will only need my phone from now on. No more dices to keep track of lifetotals..
-
 
 
 ## Wireframe
