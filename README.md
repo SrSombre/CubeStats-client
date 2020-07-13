@@ -72,7 +72,7 @@ The goal of this project is to build a full-stack app, practicing known and expl
 /// Picture needs to be added ///
 
 ## Datamodel
-
+![image_of_data_model] (https://github.com/SrSombre/CubeStats-server/blob/bike/DB-model.png?raw=true)
 
 
 ## Backend server repo
