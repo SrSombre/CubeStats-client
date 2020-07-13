@@ -73,7 +73,7 @@ The goal of this project is to build a full-stack app, practicing known and expl
 
 ## Datamodel
 
-/// Picture needs to be added ///
+
 
 ## Backend server repo
 
